@@ -36,6 +36,7 @@ function App() {
 
     const handleClickSection = (val) => {
       SetSection(val);
+      Play();
     };
 
     const handleClicKButtonDelet = (val) => {
@@ -47,6 +48,67 @@ function App() {
       setTimeout(() => {
         SetSection("list");
       }, 1);
+    };
+
+    const Alea = (arrey) => {
+      const nub = parseInt(Math.random() * arrey.length);
+      return nub;
+    };
+
+    function shuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+
+    const Play = () => {
+      setTimeout(() => {}, 6);
+      const chave = document.getElementById("Palavra");
+      const um = document.getElementById("OpcUm");
+      const dois = document.getElementById("OpcDois");
+      const treis = document.getElementById("OpcTreis");
+      const quatro = document.getElementById("OpcQuatro");
+      const cinco = document.getElementById("OpcCinco");
+
+      const array = shuffle(list);
+
+      const novoArrey = [];
+
+      for (var i = 0; i <= 4; i++) {
+        novoArrey.push(array[i]);
+      }
+      const verdadeiro = Alea(novoArrey);
+
+      chave.innerText = novoArrey[verdadeiro].PT;
+      um.innerText = novoArrey[0].EN;
+      dois.innerText = novoArrey[1].EN;
+      treis.innerText = novoArrey[2].EN;
+      quatro.innerText = novoArrey[3].EN;
+      cinco.innerText = novoArrey[4].EN;
+    };
+
+    const handleClicComfirme = (props) => {
+      // eslint-disable-next-line react/prop-types
+      const id = document.getElementById(props.target.id);
+      const verdadeira = document.getElementById("Palavra");
+
+      list.map((val) => {
+        if (val.PT === verdadeira.textContent) {
+          if (val.EN === id.textContent) {
+            return console.log("TRUE");
+          } else {
+            return console.log("False");
+          }
+        }
+      });
     };
 
     return (
@@ -72,7 +134,52 @@ function App() {
           </div>
         </div>
         <div className="bg-white w-80 m-auto mt-10  rounded-md bg-white h-4/5 mb-10">
-          {section == "play" ? <></> : <></>}
+          {section == "play" ? (
+            <section className="text-center p-10">
+              <div className="font-serif text-4xl mb-10 " id="Palavra">
+                Com
+              </div>
+              <div className="h-px bg-sky-800 mb-10  "></div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                id="OpcUm"
+                onClick={handleClicComfirme}
+              >
+                With
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                id="OpcDois"
+                onClick={handleClicComfirme}
+              >
+                Without
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                id="OpcTreis"
+                onClick={handleClicComfirme}
+              >
+                Home
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                id="OpcQuatro"
+                onClick={handleClicComfirme}
+              >
+                Red
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                id="OpcCinco"
+                onClick={handleClicComfirme}
+              >
+                Blue
+              </div>
+            </section>
+          ) : (
+            <></>
+          )}
+
           {section == "addlist" ? (
             <section>
               <form id="Form" className="Form p-10 text-center">
