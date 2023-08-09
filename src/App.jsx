@@ -265,7 +265,7 @@ function App() {
           )}
           {section == "list" ? (
             <section className="text-center ">
-              <div className="text-2xl p-3">Dicionario</div>
+              <div className="text-2xl p-3">Dicionário</div>
               <div className="bg-black w-60 m-auto h-1"></div>
               <div>
                 <ul className="p-10 text-start h-60vh overflow-auto ">
