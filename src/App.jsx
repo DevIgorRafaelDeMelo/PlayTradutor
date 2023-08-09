@@ -9,6 +9,12 @@ import {
 
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
+list.push({ PT: "Nada", EN: "Nothing" });
+list.push({ PT: "Nunca", EN: "Never" });
+list.push({ PT: "Mais", EN: "More" });
+list.push({ PT: "Paraiso", EN: "Heaven" });
+list.push({ PT: "Longe", EN: "Far" });
+
 function App() {
   const [section, SetSection] = useState("play");
 
@@ -167,35 +173,35 @@ function App() {
                 id="OpcUm"
                 onClick={handleClicComfirme}
               >
-                {list[1].EN}
+                {list[0].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcDois"
                 onClick={handleClicComfirme}
               >
-                {list[2].EN}
+                {list[1].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcTreis"
                 onClick={handleClicComfirme}
               >
-                {list[3].EN}
+                {list[2].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcQuatro"
                 onClick={handleClicComfirme}
               >
-                {list[4].EN}
+                {list[3].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcCinco"
                 onClick={handleClicComfirme}
               >
-                {list[5].EN}
+                {list[4].EN}
               </div>
 
               <div className="flex mt-5 justify-between  p-5">
