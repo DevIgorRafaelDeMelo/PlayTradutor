@@ -16,7 +16,7 @@ list.push({ PT: "Paraiso", EN: "Heaven" });
 list.push({ PT: "Longe", EN: "Far" });
 
 function App() {
-  const [section, SetSection] = useState("list");
+  const [section, SetSection] = useState("play");
 
   const Pag = () => {
     const handleClicButton = () => {
@@ -93,12 +93,14 @@ function App() {
       }
       const verdadeiro = Alea(novoArrey);
 
-      chave.innerText = novoArrey[verdadeiro].PT;
-      um.innerText = novoArrey[0].EN;
-      dois.innerText = novoArrey[1].EN;
-      treis.innerText = novoArrey[2].EN;
-      quatro.innerText = novoArrey[3].EN;
-      cinco.innerText = novoArrey[4].EN;
+      if (chave) {
+        chave.textContent = novoArrey[verdadeiro].PT;
+        um.textContent = novoArrey[0].EN;
+        dois.textContent = novoArrey[1].EN;
+        treis.textContent = novoArrey[2].EN;
+        quatro.textContent = novoArrey[3].EN;
+        cinco.textContent = novoArrey[4].EN;
+      }
     };
 
     const handleClicComfirme = (props) => {
