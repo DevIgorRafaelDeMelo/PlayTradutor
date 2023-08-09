@@ -36,8 +36,10 @@ function App() {
 
       localStorage.setItem("list", JSON.stringify(list));
 
-      PT.value = "";
-      EN.value = "";
+      if (PT) {
+        PT.value = "";
+        EN.value = "";
+      }
     };
 
     const handleClickSection = (val) => {
