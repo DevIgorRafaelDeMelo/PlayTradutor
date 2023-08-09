@@ -14,6 +14,11 @@ list.push({ PT: "Nunca", EN: "Never" });
 list.push({ PT: "Mais", EN: "More" });
 list.push({ PT: "Paraiso", EN: "Heaven" });
 list.push({ PT: "Longe", EN: "Far" });
+list.push({ PT: "Céu", EN: "Sky" });
+list.push({ PT: "House", EN: "House" });
+list.push({ PT: "Sozinho", EN: "Alone" });
+list.push({ PT: "Mais", EN: "But" });
+list.push({ PT: "Sentir", EN: "Feel" });
 
 function App() {
   const [section, SetSection] = useState("play");
@@ -48,9 +53,12 @@ function App() {
     };
 
     const handleClicKButtonDelet = (val) => {
-      console.log(list);
       list.splice(list.indexOf(val), 1);
       localStorage.setItem("list", JSON.stringify(list));
+
+      if (list.length <= 4) {
+        return;
+      }
 
       SetSection("");
       setTimeout(() => {
@@ -164,40 +172,40 @@ function App() {
         <div className="bg-white w-80 m-auto mt-10  rounded-md bg-white h-4/5 mb-10">
           {section == "play" ? (
             <section className="text-center p-10">
-              <div className="font-serif text-4xl mb-10 " id="Palavra">
+              <div className="font-serif text-2xl mb-10 " id="Palavra">
                 {list[1].PT}
               </div>
               <div className="h-px bg-sky-800 mb-10  "></div>
               <div
-                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcUm"
                 onClick={handleClicComfirme}
               >
                 {list[0].EN}
               </div>
               <div
-                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcDois"
                 onClick={handleClicComfirme}
               >
                 {list[1].EN}
               </div>
               <div
-                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcTreis"
                 onClick={handleClicComfirme}
               >
                 {list[2].EN}
               </div>
               <div
-                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcQuatro"
                 onClick={handleClicComfirme}
               >
                 {list[3].EN}
               </div>
               <div
-                className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcCinco"
                 onClick={handleClicComfirme}
               >
@@ -206,13 +214,13 @@ function App() {
 
               <div className="flex mt-5 justify-between  p-5">
                 <div
-                  className=" w-20 bg-sky-500 p-4 rounded-md text-white"
+                  className=" w-20 bg-sky-500 p-2 rounded-md text-white"
                   id="mais"
                 >
                   0
                 </div>
                 <div
-                  className=" w-20 bg-red-500 p-4 rounded-md text-white"
+                  className=" w-20 bg-red-500 p-2 rounded-md text-white"
                   id="menos"
                 >
                   0
