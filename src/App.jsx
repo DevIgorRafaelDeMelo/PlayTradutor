@@ -9,6 +9,12 @@ import {
 
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
+list.push({ PT: "Nada", EN: "Nothing" });
+list.push({ PT: "Nunca", EN: "Never" });
+list.push({ PT: "Mais", EN: "More" });
+list.push({ PT: "Paraiso", EN: "Heaven" });
+list.push({ PT: "Longe", EN: "Far" });
+
 function App() {
   const [section, SetSection] = useState("list");
 
@@ -99,16 +105,34 @@ function App() {
       // eslint-disable-next-line react/prop-types
       const id = document.getElementById(props.target.id);
       const verdadeira = document.getElementById("Palavra");
+      var valor = false;
 
       list.map((val) => {
         if (val.PT === verdadeira.textContent) {
           if (val.EN === id.textContent) {
-            return console.log("TRUE");
-          } else {
-            return console.log("False");
+            return (valor = true);
           }
         }
       });
+
+      return Verificar(valor);
+    };
+
+    var mais = 0;
+    var menos = 0;
+    const Verificar = (valor) => {
+      if (valor) {
+        var v1 = document.getElementById("mais");
+        mais++;
+        v1.innerText = String(mais);
+        Play();
+      }
+      if (!valor) {
+        var v2 = document.getElementById("menos");
+        menos++;
+        v2.innerText = String(menos);
+        Play();
+      }
     };
 
     return (
@@ -137,7 +161,7 @@ function App() {
           {section == "play" ? (
             <section className="text-center p-10">
               <div className="font-serif text-4xl mb-10 " id="Palavra">
-                Com
+                {list[1].PT}
               </div>
               <div className="h-px bg-sky-800 mb-10  "></div>
               <div
@@ -145,35 +169,50 @@ function App() {
                 id="OpcUm"
                 onClick={handleClicComfirme}
               >
-                With
+                {list[1].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcDois"
                 onClick={handleClicComfirme}
               >
-                Without
+                {list[2].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcTreis"
                 onClick={handleClicComfirme}
               >
-                Home
+                {list[3].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcQuatro"
                 onClick={handleClicComfirme}
               >
-                Red
+                {list[4].EN}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-2xl text-white "
                 id="OpcCinco"
                 onClick={handleClicComfirme}
               >
-                Blue
+                {list[5].EN}
+              </div>
+
+              <div className="flex mt-5 justify-between  p-5">
+                <div
+                  className=" w-20 bg-sky-500 p-4 rounded-md text-white"
+                  id="mais"
+                >
+                  0
+                </div>
+                <div
+                  className=" w-20 bg-red-500 p-4 rounded-md text-white"
+                  id="menos"
+                >
+                  0
+                </div>
               </div>
             </section>
           ) : (
@@ -181,7 +220,7 @@ function App() {
           )}
 
           {section == "addlist" ? (
-            <section>
+            <section className="pt-40">
               <form id="Form" className="Form p-10 text-center">
                 <div className="bg-sky-300 p-5 rounded-md mb-6">
                   <label className="text-white">Palavra Portugues</label>
@@ -192,7 +231,7 @@ function App() {
                   />
                 </div>
                 <div className="bg-sky-300 p-5 rounded-md mb-6">
-                  <label className="text-white">Tradução Ingles</label>
+                  <label className="text-white">Tradução Inglês</label>
                   <input
                     id="palavraEN"
                     type="Text"
