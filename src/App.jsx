@@ -9,12 +9,6 @@ import {
 
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
-list.push({ PT: "Nada", EN: "Nothing" });
-list.push({ PT: "Nunca", EN: "Never" });
-list.push({ PT: "Mais", EN: "More" });
-list.push({ PT: "Paraiso", EN: "Heaven" });
-list.push({ PT: "Longe", EN: "Far" });
-
 function App() {
   const [section, SetSection] = useState("play");
 
@@ -232,6 +226,7 @@ function App() {
                     id="palavraPT"
                     type="Text"
                     className="w-full focus:outline-none"
+                    placeholder="PT"
                   />
                 </div>
                 <div className="bg-sky-300 p-5 rounded-md mb-6">
@@ -240,6 +235,7 @@ function App() {
                     id="palavraEN"
                     type="Text"
                     className="w-full focus:outline-none"
+                    placeholder="EN"
                   />
                 </div>
                 <div
