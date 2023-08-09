@@ -172,10 +172,10 @@ function App() {
         <div className="bg-white w-80 m-auto mt-10  rounded-md bg-white h-4/5 mb-10">
           {section == "play" ? (
             <section className="text-center p-10">
-              <div className="font-serif text-2xl mb-10 " id="Palavra">
+              <div className="font-serif text-2xl  " id="Palavra">
                 {list[1].PT}
               </div>
-              <div className="h-px bg-sky-800 mb-10  "></div>
+              <div className="h-px bg-sky-800 m-2  "></div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcUm"
@@ -232,7 +232,7 @@ function App() {
           )}
 
           {section == "addlist" ? (
-            <section className="pt-40">
+            <section className="pt-10">
               <form id="Form" className="Form p-10 text-center">
                 <div className="bg-sky-300 p-5 rounded-md mb-6">
                   <label className="text-white">Palavra Portugues</label>
@@ -256,7 +256,7 @@ function App() {
                   className="bg-sky-500 rounded-md m-auto p-4 w-40 text-white h-14"
                   onClick={handleClicButton}
                 >
-                  Comfirmar
+                  Confirmar
                 </div>
               </form>
             </section>
