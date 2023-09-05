@@ -9,19 +9,8 @@ import {
 
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
-list.push({ PT: "Nada", EN: "Nothing" });
-list.push({ PT: "Nunca", EN: "Never" });
-list.push({ PT: "Mais", EN: "More" });
-list.push({ PT: "Paraiso", EN: "Heaven" });
-list.push({ PT: "Longe", EN: "Far" });
-list.push({ PT: "Céu", EN: "Sky" });
-list.push({ PT: "House", EN: "House" });
-list.push({ PT: "Sozinho", EN: "Alone" });
-list.push({ PT: "Mais", EN: "But" });
-list.push({ PT: "Sentir", EN: "Feel" });
-
 function App() {
-  const [section, SetSection] = useState("play");
+  const [section, SetSection] = useState("addlist");
 
   const Pag = () => {
     const handleClicButton = () => {
@@ -31,6 +20,12 @@ function App() {
       if (PT.value === "" || EN.value === "") {
         return alert("Nenhum dado inserido");
       }
+
+      list.map((val) => {
+        if (EN.value == val.EN) {
+          return;
+        }
+      });
 
       const itemAtualNew = {
         PT: PT.value,
@@ -148,32 +143,12 @@ function App() {
     };
 
     return (
-      <section className="bg-sky-400 h-screen p-10 ">
-        <div className="flex justify-between pt-10 w-60 m-auto">
-          <div
-            className="text-white text-5xl pt-2  "
-            onClick={() => handleClickSection("addlist")}
-          >
-            <AiOutlineProfile />
-          </div>
-          <div
-            className="text-white text-6xl"
-            onClick={() => handleClickSection("play")}
-          >
-            <AiFillPlayCircle />
-          </div>
-          <div
-            className="text-white text-5xl pt-2"
-            onClick={() => handleClickSection("list")}
-          >
-            <AiOutlineUnorderedList />
-          </div>
-        </div>
-        <div className="bg-white w-80 m-auto mt-10  rounded-md bg-white h-4/5 mb-10">
+      <section className="bg-sky-400 h-screen overflow-hidden pt-10  ">
+        <div className="bg-white w-80 m-auto  rounded-md bg-white h-4/5 mb-10">
           {section == "play" ? (
             <section className="text-center p-10">
               <div className="font-serif text-2xl  " id="Palavra">
-                {list[1].PT}
+                {list[1].EN}
               </div>
               <div className="h-px bg-sky-800 m-2  "></div>
               <div
@@ -181,35 +156,35 @@ function App() {
                 id="OpcUm"
                 onClick={handleClicComfirme}
               >
-                {list[0].EN}
+                {list[0].PT}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcDois"
                 onClick={handleClicComfirme}
               >
-                {list[1].EN}
+                {list[1].PT}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcTreis"
                 onClick={handleClicComfirme}
               >
-                {list[2].EN}
+                {list[2].PT}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcQuatro"
                 onClick={handleClicComfirme}
               >
-                {list[3].EN}
+                {list[3].PT}
               </div>
               <div
                 className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
                 id="OpcCinco"
                 onClick={handleClicComfirme}
               >
-                {list[4].EN}
+                {list[4].PT}
               </div>
 
               <div className="flex mt-5 justify-between  p-5">
@@ -234,21 +209,21 @@ function App() {
           {section == "addlist" ? (
             <section className="pt-10">
               <form id="Form" className="Form p-10 text-center">
-                <div className="bg-sky-300 p-5 rounded-md mb-6">
+                <div className="bg-sky-500 p-5 rounded-md mb-6">
                   <label className="text-white">Palavra Portugues</label>
                   <input
                     id="palavraPT"
                     type="Text"
-                    className="w-full focus:outline-none"
+                    className="w-full focus:outline-none p-3"
                     placeholder="PT"
                   />
                 </div>
-                <div className="bg-sky-300 p-5 rounded-md mb-6">
+                <div className="bg-sky-500 p-5 rounded-md mb-6">
                   <label className="text-white">Tradução Inglês</label>
                   <input
                     id="palavraEN"
                     type="Text"
-                    className="w-full focus:outline-none"
+                    className="w-full focus:outline-none p-3"
                     placeholder="EN"
                   />
                 </div>
@@ -300,6 +275,26 @@ function App() {
           ) : (
             <></>
           )}
+        </div>
+        <div className="flex justify-between bg-black p-10 m-auto">
+          <div
+            className="text-white text-5xl pt-2  "
+            onClick={() => handleClickSection("addlist")}
+          >
+            <AiOutlineProfile />
+          </div>
+          <div
+            className="text-white text-6xl"
+            onClick={() => handleClickSection("play")}
+          >
+            <AiFillPlayCircle />
+          </div>
+          <div
+            className="text-white text-5xl pt-2"
+            onClick={() => handleClickSection("list")}
+          >
+            <AiOutlineUnorderedList />
+          </div>
         </div>
       </section>
     );
