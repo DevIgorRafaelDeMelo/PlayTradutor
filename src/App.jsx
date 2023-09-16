@@ -10,7 +10,7 @@ import {
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
 function App() {
-  const [section, SetSection] = useState("addlist");
+  const [section, SetSection] = useState("NULL");
 
   const Pag = () => {
     const handleClicButton = () => {
@@ -113,7 +113,6 @@ function App() {
       const id = document.getElementById(props.target.id);
       const verdadeira = document.getElementById("Palavra");
       var valor = false;
-
       list.map((val) => {
         if (val.PT === verdadeira.textContent) {
           if (val.EN === id.textContent) {
@@ -125,8 +124,14 @@ function App() {
       return Verificar(valor);
     };
 
+    const handleClicComfirmePlay = () => {
+      const Cheking = document.getElementById("Cheking");
+      Cheking.classList =
+        "fixed h-4/6 inset-x-8 top-30 w-max m-auto bg-white hidden rounded-md";
+      Play();
+    };
+
     var mais = 0;
-    var menos = 0;
     const Verificar = (valor) => {
       if (valor) {
         var v1 = document.getElementById("mais");
@@ -135,18 +140,55 @@ function App() {
         Play();
       }
       if (!valor) {
-        var v2 = document.getElementById("menos");
-        menos++;
-        v2.innerText = String(menos);
-        Play();
+        const Cheking = document.getElementById("Cheking");
+        const Check = document.getElementById("Check");
+        const Checkout = document.getElementById("Checkout");
+        const valor = document.getElementById("Palavra").textContent;
+        var traducaoCorreta = list.map((val) => {
+          if (val.PT === valor) {
+            return val.EN;
+          }
+        });
+        traducaoCorreta = String(traducaoCorreta).replace(/,/g, "");
+
+        Cheking.classList.remove("hidden");
+
+        Checkout.textContent = valor;
+        Check.textContent = traducaoCorreta;
       }
     };
 
     return (
       <section className="bg-sky-400 h-screen overflow-hidden pt-10  ">
         <div className="bg-white w-80 m-auto  rounded-md bg-white h-4/5 mb-10">
-          {section == "play" ? (
+          {section == "play" && list.length < 5 ? (
+            <>
+              <div className="pt-40"></div>
+              <div className=" p-5  text-center bg-sky-500">
+                Deve conter pelo menos cinco item cadastrado no seu dicionário
+              </div>
+              <div className="pt-40"></div>{" "}
+            </>
+          ) : (
+            <></>
+          )}
+          {section == "play" && list.length >= 5 ? (
             <section className="text-center p-10">
+              <div
+                id="Cheking"
+                className="fixed h-4/6 inset-x-8 top-30 w-max m-auto bg-white hidden rounded-md"
+              >
+                <div id="Check" className="pt-20 w-80 text-2xl">
+                  0
+                </div>
+                <div id="Checkout">0</div>
+                <div
+                  className="bg-sky-500 mt-20 py-4  text-3xl"
+                  onClick={handleClicComfirmePlay}
+                >
+                  Confirme
+                </div>
+              </div>
               <div className="font-serif text-2xl  " id="Palavra">
                 {list[1].EN}
               </div>
@@ -187,16 +229,11 @@ function App() {
                 {list[4].PT}
               </div>
 
-              <div className="flex mt-5 justify-between  p-5">
+              <div className=" mt-5  p-5">
+                <div className="pb-4">Acertos</div>
                 <div
-                  className=" w-20 bg-sky-500 p-2 rounded-md text-white"
+                  className=" w-20 bg-sky-500 p-2 m-auto rounded-md text-white"
                   id="mais"
-                >
-                  0
-                </div>
-                <div
-                  className=" w-20 bg-red-500 p-2 rounded-md text-white"
-                  id="menos"
                 >
                   0
                 </div>
