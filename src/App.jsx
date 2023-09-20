@@ -5,12 +5,14 @@ import {
   AiFillPlayCircle,
   AiOutlineUnorderedList,
   AiOutlineDelete,
+  AiOutlineInteraction,
 } from "react-icons/ai";
 
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
 function App() {
   const [section, SetSection] = useState("NULL");
+  const [Ling, SetLing] = useState(true);
 
   const Pag = () => {
     const handleClicButton = () => {
@@ -98,7 +100,7 @@ function App() {
       }
       const verdadeiro = Alea(novoArrey);
 
-      if (chave) {
+      if (chave && Ling === true) {
         chave.textContent = novoArrey[verdadeiro].PT;
         um.textContent = novoArrey[0].EN;
         dois.textContent = novoArrey[1].EN;
@@ -106,6 +108,17 @@ function App() {
         quatro.textContent = novoArrey[3].EN;
         cinco.textContent = novoArrey[4].EN;
       }
+      if (chave && Ling === false) {
+        chave.textContent = novoArrey[verdadeiro].EN;
+        um.textContent = novoArrey[0].PT;
+        dois.textContent = novoArrey[1].PT;
+        treis.textContent = novoArrey[2].PT;
+        quatro.textContent = novoArrey[3].PT;
+        cinco.textContent = novoArrey[4].PT;
+      }
+    };
+    const handleClickToggle = () => {
+      SetLing(!Ling);
     };
 
     const handleClicComfirme = (props) => {
@@ -113,13 +126,24 @@ function App() {
       const id = document.getElementById(props.target.id);
       const verdadeira = document.getElementById("Palavra");
       var valor = false;
-      list.map((val) => {
-        if (val.PT === verdadeira.textContent) {
-          if (val.EN === id.textContent) {
-            return (valor = true);
+      if (Ling === true) {
+        list.map((val) => {
+          if (val.PT === verdadeira.textContent) {
+            if (val.EN === id.textContent) {
+              return (valor = true);
+            }
           }
-        }
-      });
+        });
+      }
+      if (Ling === false) {
+        list.map((val) => {
+          if (val.EN === verdadeira.textContent) {
+            if (val.PT === id.textContent) {
+              return (valor = true);
+            }
+          }
+        });
+      }
 
       return Verificar(valor);
     };
@@ -148,6 +172,9 @@ function App() {
           if (val.PT === valor) {
             return val.EN;
           }
+          if (val.EN === valor) {
+            return val.PT;
+          }
         });
         traducaoCorreta = String(traducaoCorreta).replace(/,/g, "");
 
@@ -172,8 +199,94 @@ function App() {
           ) : (
             <></>
           )}
-          {section == "play" && list.length >= 5 ? (
-            <section className="text-center p-10">
+          {section == "play" && Ling === true && list.length >= 5 ? (
+            <section className="text-center p-10 relative">
+              <div
+                className="absolute top-5 right-5 "
+                onClick={handleClickToggle}
+              >
+                <AiOutlineInteraction
+                  style={{ height: "30px", width: "30px", color: "#808080" }}
+                />
+              </div>
+              <div
+                id="Cheking"
+                className="fixed h-4/6 inset-x-8 top-30 w-max m-auto bg-white hidden rounded-md"
+              >
+                <div id="Check" className="pt-20 w-80 text-2xl">
+                  0
+                </div>
+                <div id="Checkout">0</div>
+                <div
+                  className="bg-sky-500 mt-20 py-4  text-3xl"
+                  onClick={handleClicComfirmePlay}
+                >
+                  Confirme
+                </div>
+              </div>
+              <div className="font-serif text-2xl  " id="Palavra">
+                {list[1].PT}
+              </div>
+              <div className="h-px bg-sky-800 m-2  "></div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
+                id="OpcUm"
+                onClick={handleClicComfirme}
+              >
+                {list[0].EN}
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
+                id="OpcDois"
+                onClick={handleClicComfirme}
+              >
+                {list[1].EN}
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
+                id="OpcTreis"
+                onClick={handleClicComfirme}
+              >
+                {list[2].EN}
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
+                id="OpcQuatro"
+                onClick={handleClicComfirme}
+              >
+                {list[3].EN}
+              </div>
+              <div
+                className="bg-sky-500 rounded-md p-5 mb-2 text-1xl text-white "
+                id="OpcCinco"
+                onClick={handleClicComfirme}
+              >
+                {list[4].EN}
+              </div>
+
+              <div className=" mt-5  p-5">
+                <div className="pb-4">Acertos</div>
+                <div
+                  className=" w-20 bg-sky-500 p-2 m-auto rounded-md text-white"
+                  id="mais"
+                >
+                  0
+                </div>
+              </div>
+            </section>
+          ) : (
+            <></>
+          )}
+          {section == "play" && Ling === false && list.length >= 5 ? (
+            <section className="text-center p-10 relative">
+              <div
+                className="absolute top-5 right-5 "
+                onClick={handleClickToggle}
+              >
+                <AiOutlineInteraction
+                  style={{ height: "30px", width: "30px", color: "#808080" }}
+                />
+              </div>
               <div
                 id="Cheking"
                 className="fixed h-4/6 inset-x-8 top-30 w-max m-auto bg-white hidden rounded-md"
